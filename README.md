@@ -1,10 +1,11 @@
+
 Spring Data InfluxDB
-====================
+--------------------
 
 The primary goal of the [Spring Data](http://projects.spring.io/spring-data/) project is to make it easier to build Spring-powered applications that use new data access technologies such as non-relational databases, map-reduce frameworks, and cloud based data services.
 This modules provides integration with the [InfluxDB](https://influxdata.com/) database. 
 
-# Artifacts
+## Artifacts
 
 * Maven:
 
@@ -16,7 +17,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 </dependency> 
 ```
 
-# Usage
+## Usage
 
 * Configure the InfluxDB connection factory:
 
@@ -30,7 +31,7 @@ TODO
 TODO
 ```
 
-# Building
+## Building
 
 Spring Data InfluxDB uses Maven as its build system. 
 
