@@ -7,7 +7,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
 ## Artifacts
 
-* Maven:
+### Maven
 
 ```xml
 <dependency>
