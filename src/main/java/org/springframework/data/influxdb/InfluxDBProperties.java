@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.boot.autoconfigure.data.influxdb;
+package org.springframework.data.influxdb;
 
 import com.google.common.base.MoreObjects;
 import javax.validation.constraints.Max;

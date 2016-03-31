@@ -21,7 +21,6 @@ import org.influxdb.InfluxDBFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.data.influxdb.InfluxDBProperties;
 import org.springframework.util.Assert;
 
 public class InfluxDBConnectionFactory implements InitializingBean
