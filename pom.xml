@@ -12,6 +12,29 @@
   <artifactId>spring-data-influxdb</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <name>Spring Data InfluxDB</name>
+  <description>Spring integration with the InfluxDB database.</description>
+  <url>https://github.com/miwurster/spring-data-influxdb</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Michael Wurster</name>
+      <email>miwurster@googlemail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:miwurster/spring-data-influxdb.git</connection>
+    <developerConnection>scm:git:git@github.com:miwurster/spring-data-influxdb.git</developerConnection>
+  </scm>
+
   <properties>
     <!-- Project Properties -->
     <java.version>1.8</java.version>
@@ -48,21 +71,41 @@
     </dependency>
   </dependencies>
 
-  <scm>
-    <connection>scm:git:https://github.com/miwurster/spring-data-influxdb.git</connection>
-    <developerConnection>scm:git:https://github.com/miwurster/spring-data-influxdb.git</developerConnection>
-  </scm>
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
-        <!-- Compiler Configuration -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -82,7 +125,6 @@
             <target>${java.version}</target>
           </configuration>
         </plugin>
-        <!-- Compiler Configuration -->
         <plugin>
           <groupId>org.codehaus.groovy</groupId>
           <artifactId>groovy-eclipse-compiler</artifactId>
