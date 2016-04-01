@@ -22,15 +22,15 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
 * Configure the InfluxDB connection factory:
 
-```xml
-TODO
-```
+    ```xml
+    TODO
+    ```
 
 * Use `InfluxDBTemplate` to interact with the InfluxDB database:
 
-```java
-TODO
-```
+    ```java
+    TODO
+    ```
 
 ## Building
 
