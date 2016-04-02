@@ -12,7 +12,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
 ```xml
 <dependency>
-  <groupId>org.springframework.data</groupId>
+  <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
   <version>${version}</version>
 </dependency> 
