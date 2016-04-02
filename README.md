@@ -18,7 +18,21 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 </dependency> 
 ```
 
-## Usage
+## Usage (Spring Boot)
+
+* Following properties can be used in your `application.yml`:
+
+    ```yml
+    spring:
+      influxdb:
+        https: false
+        hostname: localhost
+        port: 8086
+        username: root
+        password: root
+        database: default
+        retention-policy: default
+    ```
 
 * Configure the InfluxDB connection factory:
 
