@@ -47,7 +47,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         return new InfluxDBProperties();
       }
 
-      @Bean
+      @Bean(name = "conversionService")
       public ConversionServiceFactoryBean conversionServiceFactory()
       {
         final ConversionServiceFactoryBean factoryBean = new ConversionServiceFactoryBean();
