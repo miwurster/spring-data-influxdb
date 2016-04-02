@@ -8,7 +8,7 @@
     <version>1.3.3.RELEASE</version>
   </parent>
 
-  <groupId>org.springframework.data</groupId>
+  <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
   <version>1.0-SNAPSHOT</version>
 
