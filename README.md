@@ -54,7 +54,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         }
 
         @Bean
-        public InfluxDBTemplate<Measurements> influxDBTemplate(final ConversionService conversionService)
+        public InfluxDBTemplate<String> influxDBTemplate(final ConversionService conversionService)
         {
           return new InfluxDBTemplate<>(connectionFactory(), conversionService);
         }
