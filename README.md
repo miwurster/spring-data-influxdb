@@ -47,12 +47,12 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         return new InfluxDBProperties();
       }
 
-      @Bean(name = "conversionService")
-      public ConversionServiceFactoryBean conversionServiceFactory()
+      @Bean
+      public DefaultConversionService conversionService()
       {
-        final ConversionServiceFactoryBean factoryBean = new ConversionServiceFactoryBean();
-        factoryBean.setConverters(/* ... */);
-        return factoryBean;
+        final DefaultConversionService conversionService = new DefaultConversionService();
+        conversionService.addConverter(new StringToPointCollectionConverter());
+        return conversionService;
       }
 
       @Configuration
@@ -70,7 +70,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         @Bean
         public InfluxDBTemplate<String> influxDBTemplate(final ConversionService conversionService)
         {
-          return new InfluxDBTemplate<>(connectionFactory(), conversionService);
+          return new InfluxDBTemplate<>(connectionFactory(), conversionService());
         }
       }
     }
@@ -83,7 +83,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     private InfluxDBTemplate<String> influxDBTemplate;
     
     influxDBTemplate.createDatabase();
-    influxDBTemplate.write("cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000");
+    influxDBTemplate.write("cpu_load_short=0.64");
     ```
 
 ## Building

@@ -33,7 +33,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
 {
   private ConversionService conversionService;
 
-  private final TypeDescriptor targetTypeDescriptor = TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Point.class));
+  private final TypeDescriptor targetType = TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Point.class));
 
   public InfluxDBTemplate()
   {
@@ -66,65 +66,68 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   @Override
   public void createDatabase()
   {
-    final String database = getConnectionFactory().getProperties().getDatabase();
-    getConnectionFactory().getConnection().createDatabase(database);
+    final String database = getDatabase();
+    getConnection().createDatabase(database);
   }
 
   @Override
   public void write(final T payload)
   {
     Preconditions.checkArgument(payload != null, "Parameter 'object' must not be null");
-    final String database = getConnectionFactory().getProperties().getDatabase();
-    final String retentionPolicy = getConnectionFactory().getProperties().getRetentionPolicy();
+    final String database = getDatabase();
+    final String retentionPolicy = getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
       .retentionPolicy(retentionPolicy)
       .consistency(InfluxDB.ConsistencyLevel.ALL)
       .build();
-    convert(payload).stream().forEach(ops::point);
-    getConnectionFactory().getConnection().write(ops);
+    convert(payload).forEach(ops::point);
+    getConnection().write(ops);
   }
 
   @Override
   public void write(final List<T> payload)
   {
     Preconditions.checkArgument(payload != null, "Parameter 'object' must not be null");
-    final String database = getConnectionFactory().getProperties().getDatabase();
+    final String database = getDatabase();
     final String retentionPolicy = getConnectionFactory().getProperties().getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
       .retentionPolicy(retentionPolicy)
       .consistency(InfluxDB.ConsistencyLevel.ALL)
       .build();
-    payload.stream().forEach(t -> convert(t).stream().forEach(ops::point));
-    getConnectionFactory().getConnection().write(ops);
+    payload.forEach(t -> convert(t).forEach(ops::point));
+    getConnection().write(ops);
   }
 
   @Override
   public QueryResult query(final Query query)
   {
-    return getConnectionFactory().getConnection().query(query);
+    return getConnection().query(query);
   }
 
   @Override
   public QueryResult query(final Query query, final TimeUnit timeUnit)
   {
-    return getConnectionFactory().getConnection().query(query, timeUnit);
+    return getConnection().query(query, timeUnit);
   }
 
   @Override
   public Pong ping()
   {
-    return getConnectionFactory().getConnection().ping();
+    return getConnection().ping();
   }
 
   @Override
   public String version()
   {
-    return getConnectionFactory().getConnection().version();
+    return getConnection().version();
   }
 
   @SuppressWarnings("unchecked")
   private List<Point> convert(T payload)
   {
-    return (List<Point>) conversionService.convert(payload, TypeDescriptor.forObject(payload), targetTypeDescriptor);
+    final TypeDescriptor sourceType = TypeDescriptor.forObject(payload);
+    Preconditions.checkState(conversionService.canConvert(sourceType, targetType),
+                             "Object of type {} cannot be converted to {}", sourceType, targetType);
+    return (List<Point>) conversionService.convert(payload, TypeDescriptor.forObject(payload), targetType);
   }
 }

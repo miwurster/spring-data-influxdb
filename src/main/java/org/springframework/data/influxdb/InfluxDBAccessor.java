@@ -16,6 +16,7 @@
 
 package org.springframework.data.influxdb;
 
+import org.influxdb.InfluxDB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -45,6 +46,21 @@ public class InfluxDBAccessor implements InitializingBean
   public void setConnectionFactory(final InfluxDBConnectionFactory connectionFactory)
   {
     this.connectionFactory = connectionFactory;
+  }
+
+  public String getDatabase()
+  {
+    return getConnectionFactory().getProperties().getDatabase();
+  }
+
+  public String getRetentionPolicy()
+  {
+    return getConnectionFactory().getProperties().getRetentionPolicy();
+  }
+
+  public InfluxDB getConnection()
+  {
+    return getConnectionFactory().getConnection();
   }
 
   @Override

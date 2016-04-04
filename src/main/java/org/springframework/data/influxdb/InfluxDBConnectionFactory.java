@@ -27,7 +27,7 @@ public class InfluxDBConnectionFactory implements InitializingBean
 {
   private static Logger logger = LoggerFactory.getLogger(InfluxDBConnectionFactory.class);
 
-  private static InfluxDB connection;
+  private InfluxDB connection;
 
   private InfluxDBProperties properties;
 
@@ -44,10 +44,11 @@ public class InfluxDBConnectionFactory implements InitializingBean
   public InfluxDB getConnection()
   {
     Assert.notNull(getProperties(), "InfluxDBProperties are required");
-    if (connection == null) connection = InfluxDBFactory.connect(properties.getUrl(),
-                                                                 properties.getUsername(),
-                                                                 properties.getPassword());
-    logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
+    if (connection == null)
+    {
+      connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(), properties.getPassword());
+      logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
+    }
     return connection;
   }
 

@@ -17,23 +17,14 @@
 package org.springframework.data.influxdb;
 
 import com.google.common.base.MoreObjects;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.data.influxdb.detail.URLBuilder;
 
 @ConfigurationProperties("spring.influxdb")
 public class InfluxDBProperties
 {
-  private boolean https = false;
-
   @NotEmpty
-  private String hostname;
-
-  @Min(1)
-  @Max(65535)
-  private Integer port;
+  private String url;
 
   @NotEmpty
   private String username;
@@ -47,34 +38,14 @@ public class InfluxDBProperties
   @NotEmpty
   private String retentionPolicy;
 
-  public boolean isHttps()
+  public String getUrl()
   {
-    return https;
+    return url;
   }
 
-  public void setHttps(final boolean https)
+  public void setUrl(final String url)
   {
-    this.https = https;
-  }
-
-  public String getHostname()
-  {
-    return hostname;
-  }
-
-  public void setHostname(final String hostname)
-  {
-    this.hostname = hostname;
-  }
-
-  public Integer getPort()
-  {
-    return port;
-  }
-
-  public void setPort(final Integer port)
-  {
-    this.port = port;
+    this.url = url;
   }
 
   public String getUsername()
@@ -117,21 +88,13 @@ public class InfluxDBProperties
     this.retentionPolicy = retentionPolicy;
   }
 
-  public String getUrl()
-  {
-    return URLBuilder.create()
-      .protocol(isHttps() ? "https" : "http")
-      .host(getHostname()).port(getPort())
-      .and().buildIt().toString();
-  }
-
   @Override
   public String toString()
   {
     return MoreObjects.toStringHelper(this)
-      .omitNullValues()
-      .add("url", getUrl())
+      .add("url", url)
       .add("username", username)
+      .add("password", password)
       .add("database", database)
       .add("retentionPolicy", retentionPolicy)
       .toString();

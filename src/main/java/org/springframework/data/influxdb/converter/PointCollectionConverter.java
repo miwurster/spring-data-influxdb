@@ -20,7 +20,7 @@ import java.util.List;
 import org.influxdb.dto.Point;
 import org.springframework.core.convert.converter.Converter;
 
-public interface PointsConverter<T> extends Converter<T, List<Point>>
+public interface PointCollectionConverter<T> extends Converter<T, List<Point>>
 {
 
 }
