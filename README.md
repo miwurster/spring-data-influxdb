@@ -38,40 +38,27 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
     ```java
     @Configuration
-    @EnableConfigurationProperties
+    @EnableConfigurationProperties(InfluxDBProperties.class)
     public class InfluxDBConfiguration
     {
-      @Bean(name = "org.springframework.data.influxdb.InfluxDBProperties")
-      public InfluxDBProperties influxDBProperties()
-      {
-        return new InfluxDBProperties();
-      }
-
       @Bean
-      public DefaultConversionService conversionService()
+      public ConversionService conversionService()
       {
         final DefaultConversionService conversionService = new DefaultConversionService();
-        conversionService.addConverter(new StringToPointCollectionConverter());
+        conversionService.addConverter(/* ... */);
         return conversionService;
       }
 
-      @Configuration
-      protected static class InfluxDBAutoConfiguration
+      @Bean
+      public InfluxDBConnectionFactory connectionFactory(final InfluxDBProperties properties)
       {
-        @Autowired
-        protected InfluxDBProperties properties;
+        return new InfluxDBConnectionFactory(properties);
+      }
 
-        @Bean
-        public InfluxDBConnectionFactory connectionFactory()
-        {
-          return new InfluxDBConnectionFactory(properties);
-        }
-
-        @Bean
-        public InfluxDBTemplate<String> influxDBTemplate(final ConversionService conversionService)
-        {
-          return new InfluxDBTemplate<>(connectionFactory(), conversionService());
-        }
+      @Bean
+      public InfluxDBTemplate<Measurements> influxDBTemplate(final InfluxDBConnectionFactory connectionFactory)
+      {
+        return new InfluxDBTemplate<>(connectionFactory, conversionService());
       }
     }
     ```
