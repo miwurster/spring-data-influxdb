@@ -73,7 +73,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   @Override
   public void write(final T payload)
   {
-    Preconditions.checkArgument(payload != null, "Parameter 'object' must not be null");
+    Preconditions.checkArgument(payload != null, "Parameter 'payload' must not be null");
     final String database = getDatabase();
     final String retentionPolicy = getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
@@ -87,7 +87,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   @Override
   public void write(final List<T> payload)
   {
-    Preconditions.checkArgument(payload != null, "Parameter 'object' must not be null");
+    Preconditions.checkArgument(payload != null, "Parameter 'payload' must not be null");
     final String database = getDatabase();
     final String retentionPolicy = getConnectionFactory().getProperties().getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
@@ -127,7 +127,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   {
     final TypeDescriptor sourceType = TypeDescriptor.forObject(payload);
     Preconditions.checkState(conversionService.canConvert(sourceType, targetType),
-                             "Object of type {} cannot be converted to {}", sourceType, targetType);
+                             "Object of type [{}] cannot be converted to [{}]", sourceType, targetType);
     return (List<Point>) conversionService.convert(payload, TypeDescriptor.forObject(payload), targetType);
   }
 }
