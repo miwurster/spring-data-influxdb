@@ -25,16 +25,14 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     ```yml
     spring:
       influxdb:
-        https: false
-        hostname: localhost
-        port: 8086
+        url: http://localhost:8086
         username: root
         password: root
-        database: default
+        database: test
         retention-policy: default
     ```
 
-* Configure the InfluxDB connection factory:
+* Create `InfluxDBConnectionFactory` and `InfluxDBTemplate` beans:
 
     ```java
     @Configuration
@@ -42,23 +40,19 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     public class InfluxDBConfiguration
     {
       @Bean
-      public ConversionService conversionService()
-      {
-        final DefaultConversionService conversionService = new DefaultConversionService();
-        conversionService.addConverter(/* ... */);
-        return conversionService;
-      }
-
-      @Bean
       public InfluxDBConnectionFactory connectionFactory(final InfluxDBProperties properties)
       {
         return new InfluxDBConnectionFactory(properties);
       }
 
       @Bean
-      public InfluxDBTemplate<Measurements> influxDBTemplate(final InfluxDBConnectionFactory connectionFactory)
+      public InfluxDBTemplate<Point> influxDBTemplate(final InfluxDBConnectionFactory connectionFactory)
       {
-        return new InfluxDBTemplate<>(connectionFactory, conversionService());
+        /*
+         * You can use your own 'PointCollectionConverter' implementation, e.g. in case
+         * you want to use your own custom measurement object.
+         */
+        return new InfluxDBTemplate<>(connectionFactory, new PointConverter());
       }
     }
     ```
@@ -67,10 +61,16 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
     ```java
     @Autowired
-    private InfluxDBTemplate<String> influxDBTemplate;
-    
+    private InfluxDBTemplate<Point> influxDBTemplate;
+
     influxDBTemplate.createDatabase();
-    influxDBTemplate.write("cpu_load_short=0.64");
+    final Point p = Point.measurement("disk")
+      .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+      .tag("tenant", "default")
+      .field("used", 80L)
+      .field("free", 1L)
+      .build();
+    influxDBTemplate.write(p);
     ```
 
 ## Building

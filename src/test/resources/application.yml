@@ -1,0 +1,7 @@
+spring:
+  influxdb:
+    url: http://localhost:8086
+    username: root
+    password: root
+    database: test
+    retention-policy: default

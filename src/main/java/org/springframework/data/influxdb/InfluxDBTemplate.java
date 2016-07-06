@@ -21,46 +21,38 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.influxdb.InfluxDB;
 import org.influxdb.dto.BatchPoints;
-import org.influxdb.dto.Point;
 import org.influxdb.dto.Pong;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.data.influxdb.converter.PointCollectionConverter;
 import org.springframework.util.Assert;
 
 public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOperations<T>
 {
-  private ConversionService conversionService;
-
-  private final TypeDescriptor targetType = TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Point.class));
+  private PointCollectionConverter<T> converter;
 
   public InfluxDBTemplate()
   {
 
   }
 
-  public InfluxDBTemplate(final InfluxDBConnectionFactory connectionFactory, final ConversionService conversionService)
+  public InfluxDBTemplate(final InfluxDBConnectionFactory connectionFactory, final PointCollectionConverter<T> converter)
   {
     setConnectionFactory(connectionFactory);
-    setConversionService(conversionService);
+    setConverter(converter);
+  }
+
+
+  public void setConverter(final PointCollectionConverter<T> converter)
+  {
+    this.converter = converter;
   }
 
   @Override
   public void afterPropertiesSet()
   {
     super.afterPropertiesSet();
-    Assert.notNull(getConversionService(), "ConversionService is required");
-  }
-
-  public ConversionService getConversionService()
-  {
-    return conversionService;
-  }
-
-  public void setConversionService(final ConversionService conversionService)
-  {
-    this.conversionService = conversionService;
+    Assert.notNull(converter, "PointCollectionConverter is required");
   }
 
   @Override
@@ -80,7 +72,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
       .retentionPolicy(retentionPolicy)
       .consistency(InfluxDB.ConsistencyLevel.ALL)
       .build();
-    convert(payload).forEach(ops::point);
+    converter.convert(payload).forEach(ops::point);
     getConnection().write(ops);
   }
 
@@ -94,7 +86,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
       .retentionPolicy(retentionPolicy)
       .consistency(InfluxDB.ConsistencyLevel.ALL)
       .build();
-    payload.forEach(t -> convert(t).forEach(ops::point));
+    payload.forEach(t -> converter.convert(t).forEach(ops::point));
     getConnection().write(ops);
   }
 
@@ -120,14 +112,5 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   public String version()
   {
     return getConnection().version();
-  }
-
-  @SuppressWarnings("unchecked")
-  private List<Point> convert(T payload)
-  {
-    final TypeDescriptor sourceType = TypeDescriptor.forObject(payload);
-    Preconditions.checkState(conversionService.canConvert(sourceType, targetType),
-                             "Object of type [{}] cannot be converted to [{}]", sourceType, targetType);
-    return (List<Point>) conversionService.convert(payload, TypeDescriptor.forObject(payload), targetType);
   }
 }
