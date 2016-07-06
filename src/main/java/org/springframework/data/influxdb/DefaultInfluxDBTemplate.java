@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package org.springframework.data.influxdb.converter;
+package org.springframework.data.influxdb;
 
-import com.google.common.collect.Lists;
-import java.util.List;
 import org.influxdb.dto.Point;
+import org.springframework.data.influxdb.converter.PointConverter;
 
-public class PointConverter implements PointCollectionConverter<Point>
+public class DefaultInfluxDBTemplate extends InfluxDBTemplate<Point>
 {
-  @Override
-  public List<Point> convert(final Point source)
+  public DefaultInfluxDBTemplate()
   {
-    return Lists.newArrayList(source);
+
+  }
+
+  public DefaultInfluxDBTemplate(final InfluxDBConnectionFactory connectionFactory)
+  {
+    super(connectionFactory, new PointConverter());
   }
 }
