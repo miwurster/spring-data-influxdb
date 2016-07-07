@@ -54,6 +54,16 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
          */
         return new InfluxDBTemplate<>(connectionFactory, new PointConverter());
       }
+      
+      @Bean
+      public DefaultInfluxDBTemplate defaultTemplate(final InfluxDBConnectionFactory connectionFactory)
+      {
+        /*
+         * If you are just dealing with Point objects from 'influxdb-java' you could
+         * also use an instance of class DefaultInfluxDBTemplate.
+         */
+        return new DefaultInfluxDBTemplate(connectionFactory);
+      }
     }
     ```
 
