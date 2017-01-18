@@ -10,7 +10,7 @@
 
   <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
-  <version>1.5-SNAPSHOT</version>
+  <version>1.5</version>
 
   <name>Spring Data InfluxDB</name>
   <description>Spring integration with InfluxDB.</description>
@@ -33,7 +33,7 @@
   <scm>
     <connection>scm:git:https://github.com/miwurster/spring-data-influxdb.git</connection>
     <developerConnection>scm:git:https://github.com/miwurster/spring-data-influxdb.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>spring-data-influxdb-1.5</tag>
   </scm>
 
   <properties>
