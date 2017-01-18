@@ -82,11 +82,13 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     final Point p = Point.measurement("disk")
       .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
       .tag("tenant", "default")
-      .field("used", 80L)
-      .field("free", 1L)
+      .addField("used", 80L)
+      .addField("free", 1L)
       .build();
     influxDBTemplate.write(p);
     ```
+
+__Note:__ Prior to version 1.5 of this module you need to use the method `field("...", value)` instead of `addField("...", value)`.
 
 ## Building
 
