@@ -88,6 +88,8 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     influxDBTemplate.write(p);
     ```
 
+__Note:__ Prior to version 1.5 of this module you need to use the method `field("...", value)` instead of `addField("...", value)`.
+
 ## Building
 
 Spring Data InfluxDB uses Maven as its build system. 
