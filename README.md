@@ -15,7 +15,12 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
   <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
   <version>${version}</version>
-</dependency> 
+</dependency>
+<dependency>
+  <groupId>org.influxdb</groupId>
+  <artifactId>influxdb-java</artifactId>
+  <version>2.5</version>
+</dependency>
 ```
 
 ## Usage (Spring Boot)
