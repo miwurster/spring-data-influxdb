@@ -29,7 +29,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         username: root
         password: root
         database: test
-        retention-policy: default
+        retention-policy: autogen
     ```
 
 * Create `InfluxDBConnectionFactory` and `InfluxDBTemplate` beans:
