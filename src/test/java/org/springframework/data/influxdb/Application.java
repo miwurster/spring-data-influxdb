@@ -21,15 +21,15 @@ public class Application implements CommandLineRunner
     final Point p1 = Point.measurement("cpu")
       .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
       .tag("tenant", "default")
-      .field("idle", 90L)
-      .field("user", 9L)
-      .field("system", 1L)
+      .addField("idle", 90L)
+      .addField("user", 9L)
+      .addField("system", 1L)
       .build();
     final Point p2 = Point.measurement("disk")
       .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
       .tag("tenant", "default")
-      .field("used", 80L)
-      .field("free", 1L)
+      .addField("used", 80L)
+      .addField("free", 1L)
       .build();
     influxDBTemplate.write(Lists.newArrayList(p1, p2));
   }

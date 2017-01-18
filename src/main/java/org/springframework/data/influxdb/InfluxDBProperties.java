@@ -29,7 +29,6 @@ public class InfluxDBProperties
   @NotEmpty
   private String username;
 
-  @NotEmpty
   private String password;
 
   @NotEmpty

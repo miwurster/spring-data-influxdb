@@ -31,8 +31,8 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     spring:
       influxdb:
         url: http://localhost:8086
-        username: root
-        password: root
+        username: user
+        password: ~
         database: test
         retention-policy: autogen
     ```
@@ -82,8 +82,8 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
     final Point p = Point.measurement("disk")
       .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
       .tag("tenant", "default")
-      .field("used", 80L)
-      .field("free", 1L)
+      .addField("used", 80L)
+      .addField("free", 1L)
       .build();
     influxDBTemplate.write(p);
     ```
