@@ -37,6 +37,9 @@ public class InfluxDBProperties
   @NotEmpty
   private String retentionPolicy;
 
+  @NotEmpty
+  private boolean createDatabase;
+
   public String getUrl()
   {
     return url;
@@ -87,6 +90,10 @@ public class InfluxDBProperties
     this.retentionPolicy = retentionPolicy;
   }
 
+  public boolean getCreateDatabase() { return createDatabase; }
+
+  public void setCreateDatabase(boolean createDatabase) { this.createDatabase = createDatabase; }
+
   @Override
   public String toString()
   {
@@ -96,6 +103,7 @@ public class InfluxDBProperties
       .add("password", password)
       .add("database", database)
       .add("retentionPolicy", retentionPolicy)
+      .add("createDatabase", createDatabase)
       .toString();
   }
 }
