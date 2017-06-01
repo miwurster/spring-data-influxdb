@@ -63,6 +63,11 @@ public class InfluxDBAccessor implements InitializingBean
     return getConnectionFactory().getConnection();
   }
 
+  public boolean getCreateDatabase()
+  {
+    return getConnectionFactory().getProperties().getCreateDatabase();
+  }
+
   @Override
   public void afterPropertiesSet()
   {

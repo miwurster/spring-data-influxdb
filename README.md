@@ -35,6 +35,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         password: ~
         database: test
         retention-policy: autogen
+        create-database: false
     ```
 
 * Create `InfluxDBConnectionFactory` and `InfluxDBTemplate` beans:
@@ -95,3 +96,8 @@ Spring Data InfluxDB uses Maven as its build system.
 ```bash
 mvn clean install
 ```
+
+## Additional Hints
+
+Since InfluxDB 1.0.0 the create-database flag must be set to false due to the removeing of the "IF NOT EXISTS" syntax in queries. 
+See https://github.com/jmxtrans/jmxtrans/issues/489 for example.

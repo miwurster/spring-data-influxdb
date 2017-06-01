@@ -17,8 +17,6 @@
 package org.springframework.data.influxdb;
 
 import com.google.common.base.Preconditions;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.influxdb.InfluxDB;
 import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Pong;
@@ -26,6 +24,9 @@ import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.springframework.data.influxdb.converter.PointCollectionConverter;
 import org.springframework.util.Assert;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOperations<T>
 {
@@ -59,7 +60,11 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   public void createDatabase()
   {
     final String database = getDatabase();
-    getConnection().createDatabase(database);
+    // Since Influx 1.0.0 this does only work if the database does not exist, otherwise "java.lang.RuntimeException: {"error":"error parsing query: found NOT, expected ; at line 1, char 20"}" is thrown
+    // See https://github.com/jmxtrans/jmxtrans/issues/489 for example
+    if (getCreateDatabase()) {
+      getConnection().createDatabase(database);
+    }
   }
 
   @Override
