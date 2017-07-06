@@ -21,81 +21,96 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("spring.influxdb")
-public class InfluxDBProperties
-{
-  @NotEmpty
-  private String url;
+public class InfluxDBProperties {
+    @NotEmpty
+    private String url;
 
-  @NotEmpty
-  private String username;
+    @NotEmpty
+    private String username;
 
-  private String password;
+    private String password;
 
-  @NotEmpty
-  private String database;
+    @NotEmpty
+    private String database;
 
-  @NotEmpty
-  private String retentionPolicy;
+    @NotEmpty
+    private String retentionPolicy;
 
-  public String getUrl()
-  {
-    return url;
-  }
+    private int connectTimeout = 10;
 
-  public void setUrl(final String url)
-  {
-    this.url = url;
-  }
+    private int readTimeout = 30;
 
-  public String getUsername()
-  {
-    return username;
-  }
+    private int writeTimeout = 10;
 
-  public void setUsername(final String username)
-  {
-    this.username = username;
-  }
+    public String getUrl() {
+	return url;
+    }
 
-  public String getPassword()
-  {
-    return password;
-  }
+    public void setUrl(final String url) {
+	this.url = url;
+    }
 
-  public void setPassword(final String password)
-  {
-    this.password = password;
-  }
+    public String getUsername() {
+	return username;
+    }
 
-  public String getDatabase()
-  {
-    return database;
-  }
+    public void setUsername(final String username) {
+	this.username = username;
+    }
 
-  public void setDatabase(final String database)
-  {
-    this.database = database;
-  }
+    public String getPassword() {
+	return password;
+    }
 
-  public String getRetentionPolicy()
-  {
-    return retentionPolicy;
-  }
+    public void setPassword(final String password) {
+	this.password = password;
+    }
 
-  public void setRetentionPolicy(final String retentionPolicy)
-  {
-    this.retentionPolicy = retentionPolicy;
-  }
+    public String getDatabase() {
+	return database;
+    }
 
-  @Override
-  public String toString()
-  {
-    return MoreObjects.toStringHelper(this)
-      .add("url", url)
-      .add("username", username)
-      .add("password", password)
-      .add("database", database)
-      .add("retentionPolicy", retentionPolicy)
-      .toString();
-  }
+    public void setDatabase(final String database) {
+	this.database = database;
+    }
+
+    public String getRetentionPolicy() {
+	return retentionPolicy;
+    }
+
+    public void setRetentionPolicy(final String retentionPolicy) {
+	this.retentionPolicy = retentionPolicy;
+    }
+
+    public int getWriteTimeout() {
+	return writeTimeout;
+    }
+
+    public void setWriteTimeout(int writeTimeout) {
+	this.writeTimeout = writeTimeout;
+    }
+
+    public int getConnectTimeout() {
+	return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+	this.connectTimeout = connectTimeout;
+    }
+
+    public int getReadTimeout() {
+	return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+	this.readTimeout = readTimeout;
+    }
+
+    @Override
+    public String toString() {
+	return MoreObjects.toStringHelper(this).add("url", url).add("username", username).add("password", password)
+		.add("database", database).add("retentionPolicy", retentionPolicy).add("connectTimeout", connectTimeout)
+		.add("readTimeout", readTimeout).add("writeTimeout", writeTimeout).toString();
+    }
+
 }

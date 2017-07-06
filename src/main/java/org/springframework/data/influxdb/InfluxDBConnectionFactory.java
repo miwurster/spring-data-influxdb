@@ -16,6 +16,10 @@
 
 package org.springframework.data.influxdb;
 
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.PostConstruct;
+
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.slf4j.Logger;
@@ -23,58 +27,57 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-public class InfluxDBConnectionFactory implements InitializingBean
-{
-  private static Logger logger = LoggerFactory.getLogger(InfluxDBConnectionFactory.class);
+import okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient.Builder;
 
-  private InfluxDB connection;
+public class InfluxDBConnectionFactory implements InitializingBean {
+	private static Logger logger = LoggerFactory.getLogger(InfluxDBConnectionFactory.class);
 
-  private InfluxDBProperties properties;
+	private InfluxDB connection;
 
-  public InfluxDBConnectionFactory()
-  {
+	private InfluxDBProperties properties;
 
-  }
+	public InfluxDBConnectionFactory() {
 
-  public InfluxDBConnectionFactory(final InfluxDBProperties properties)
-  {
-    this.properties = properties;
-  }
+	}
 
-  public InfluxDB getConnection()
-  {
-    Assert.notNull(getProperties(), "InfluxDBProperties are required");
-    if (connection == null)
-    {
-      connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(), properties.getPassword());
-      logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
-    }
-    return connection;
-  }
+	public InfluxDBConnectionFactory(final InfluxDBProperties properties) {
+		this.properties = properties;
+	}
 
-  /**
-   * Returns the configuration properties.
-   *
-   * @return Returns the configuration properties
-   */
-  public InfluxDBProperties getProperties()
-  {
-    return properties;
-  }
+	public InfluxDB getConnection() {
+		Assert.notNull(getProperties(), "InfluxDBProperties are required");
+		if (connection == null) {
+			Builder client = new OkHttpClient.Builder().connectTimeout(properties.getConnectTimeout(), TimeUnit.SECONDS)
+					.writeTimeout(properties.getWriteTimeout(), TimeUnit.SECONDS).readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
+			connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(),
+					properties.getPassword(), client);
+			logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
+		}
+		return connection;
+	}
 
-  /**
-   * Sets the configuration properties.
-   *
-   * @param properties The configuration properties to set
-   */
-  public void setProperties(final InfluxDBProperties properties)
-  {
-    this.properties = properties;
-  }
+	/**
+	 * Returns the configuration properties.
+	 *
+	 * @return Returns the configuration properties
+	 */
+	public InfluxDBProperties getProperties() {
+		return properties;
+	}
 
-  @Override
-  public void afterPropertiesSet() throws Exception
-  {
-    Assert.notNull(getProperties(), "InfluxDBProperties are required");
-  }
+	/**
+	 * Sets the configuration properties.
+	 *
+	 * @param properties
+	 *            The configuration properties to set
+	 */
+	public void setProperties(final InfluxDBProperties properties) {
+		this.properties = properties;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(getProperties(), "InfluxDBProperties are required");
+	}
 }
