@@ -43,74 +43,74 @@ public class InfluxDBProperties {
     private int writeTimeout = 10;
 
     public String getUrl() {
-	return url;
+        return url;
     }
 
     public void setUrl(final String url) {
-	this.url = url;
+        this.url = url;
     }
 
     public String getUsername() {
-	return username;
+        return username;
     }
 
     public void setUsername(final String username) {
-	this.username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-	return password;
+        return password;
     }
 
     public void setPassword(final String password) {
-	this.password = password;
+        this.password = password;
     }
 
     public String getDatabase() {
-	return database;
+        return database;
     }
 
     public void setDatabase(final String database) {
-	this.database = database;
+        this.database = database;
     }
 
     public String getRetentionPolicy() {
-	return retentionPolicy;
+        return retentionPolicy;
     }
 
     public void setRetentionPolicy(final String retentionPolicy) {
-	this.retentionPolicy = retentionPolicy;
+        this.retentionPolicy = retentionPolicy;
     }
 
     public int getWriteTimeout() {
-	return writeTimeout;
+        return writeTimeout;
     }
 
     public void setWriteTimeout(int writeTimeout) {
-	this.writeTimeout = writeTimeout;
+        this.writeTimeout = writeTimeout;
     }
 
     public int getConnectTimeout() {
-	return connectTimeout;
+        return connectTimeout;
     }
 
     public void setConnectTimeout(int connectTimeout) {
-	this.connectTimeout = connectTimeout;
+        this.connectTimeout = connectTimeout;
     }
 
     public int getReadTimeout() {
-	return readTimeout;
+        return readTimeout;
     }
 
     public void setReadTimeout(int readTimeout) {
-	this.readTimeout = readTimeout;
+        this.readTimeout = readTimeout;
     }
 
     @Override
     public String toString() {
-	return MoreObjects.toStringHelper(this).add("url", url).add("username", username).add("password", password)
-		.add("database", database).add("retentionPolicy", retentionPolicy).add("connectTimeout", connectTimeout)
-		.add("readTimeout", readTimeout).add("writeTimeout", writeTimeout).toString();
+        return MoreObjects.toStringHelper(this).add("url", url).add("username", username).add("password", password)
+                .add("database", database).add("retentionPolicy", retentionPolicy).add("connectTimeout", connectTimeout)
+                .add("readTimeout", readTimeout).add("writeTimeout", writeTimeout).toString();
     }
 
 }
