@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/miwurster/spring-data-influxdb.svg?branch=master)](https://travis-ci.org/miwurster/spring-data-influxdb)
+
 Spring Data InfluxDB
 --------------------
 
