@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.data.influxdb;
 
-import java.util.concurrent.TimeUnit;
-
+import okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient.Builder;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.slf4j.Logger;
@@ -25,8 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-import okhttp3.OkHttpClient;
-import okhttp3.OkHttpClient.Builder;
+import java.util.concurrent.TimeUnit;
 
 public class InfluxDBConnectionFactory implements InitializingBean
 {
@@ -51,11 +49,18 @@ public class InfluxDBConnectionFactory implements InitializingBean
     Assert.notNull(getProperties(), "InfluxDBProperties are required");
     if (connection == null)
     {
-        Builder client = new OkHttpClient.Builder().connectTimeout(properties.getConnectTimeout(), TimeUnit.SECONDS)
-                .writeTimeout(properties.getWriteTimeout(), TimeUnit.SECONDS).readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
-        connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(),
-                properties.getPassword(), client);
+      final Builder client = new OkHttpClient.Builder()
+        .connectTimeout(properties.getConnectTimeout(), TimeUnit.SECONDS)
+        .writeTimeout(properties.getWriteTimeout(), TimeUnit.SECONDS)
+        .readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
+      connection = InfluxDBFactory
+        .connect(properties.getUrl(), properties.getUsername(), properties.getPassword(), client);
       logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
+      if (properties.isGzip())
+      {
+        logger.debug("Enabled gzip compression for HTTP requests");
+        connection.enableGzip();
+      }
     }
     return connection;
   }

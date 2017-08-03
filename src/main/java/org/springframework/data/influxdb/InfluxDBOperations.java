@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.data.influxdb;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.influxdb.dto.Pong;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public interface InfluxDBOperations<T>
 {
@@ -44,7 +45,7 @@ public interface InfluxDBOperations<T>
   void write(List<T> payload);
 
   /**
-   * Executes a query agains the database.
+   * Executes a query against the database.
    *
    * @param query the query to execute
    * @return a List of time series data matching the query
@@ -52,13 +53,22 @@ public interface InfluxDBOperations<T>
   QueryResult query(final Query query);
 
   /**
-   * Executes a query agains the database.
+   * Executes a query against the database.
    *
    * @param query    the query to execute
    * @param timeUnit the time unit to be used for the query
    * @return a List of time series data matching the query
    */
   QueryResult query(final Query query, final TimeUnit timeUnit);
+
+  /**
+   * Execute a streaming query against the database.
+   *
+   * @param query     the query to execute
+   * @param chunkSize the number of QueryResults to process in one chunk
+   * @param consumer  the consumer to invoke for each received QueryResult
+   */
+  void query(final Query query, final int chunkSize, final Consumer<QueryResult> consumer);
 
   /**
    * Ping the database.

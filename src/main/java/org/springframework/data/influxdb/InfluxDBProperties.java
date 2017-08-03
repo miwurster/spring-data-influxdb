@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.data.influxdb;
 
-import com.google.common.base.MoreObjects;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -42,6 +40,8 @@ public class InfluxDBProperties
   private int readTimeout = 30;
 
   private int writeTimeout = 10;
+
+  private boolean gzip = false;
 
   public String getUrl()
   {
@@ -93,42 +93,43 @@ public class InfluxDBProperties
     this.retentionPolicy = retentionPolicy;
   }
 
-    public int getWriteTimeout() {
-        return writeTimeout;
-    }
-
-    public void setWriteTimeout(int writeTimeout) {
-        this.writeTimeout = writeTimeout;
-    }
-
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public void setConnectTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-    }
-
-    public int getReadTimeout() {
-        return readTimeout;
-    }
-
-    public void setReadTimeout(int readTimeout) {
-        this.readTimeout = readTimeout;
-    }
-
-  @Override
-  public String toString()
+  public int getWriteTimeout()
   {
-    return MoreObjects.toStringHelper(this)
-      .add("url", url)
-      .add("username", username)
-      .add("password", password)
-      .add("database", database)
-      .add("retentionPolicy", retentionPolicy)
-      .add("connectTimeout", connectTimeout)
-      .add("readTimeout", readTimeout)
-      .add("writeTimeout", writeTimeout)
-      .toString();
+    return writeTimeout;
+  }
+
+  public void setWriteTimeout(int writeTimeout)
+  {
+    this.writeTimeout = writeTimeout;
+  }
+
+  public int getConnectTimeout()
+  {
+    return connectTimeout;
+  }
+
+  public void setConnectTimeout(int connectTimeout)
+  {
+    this.connectTimeout = connectTimeout;
+  }
+
+  public int getReadTimeout()
+  {
+    return readTimeout;
+  }
+
+  public void setReadTimeout(int readTimeout)
+  {
+    this.readTimeout = readTimeout;
+  }
+
+  public boolean isGzip()
+  {
+    return gzip;
+  }
+
+  public void setGzip(boolean gzip)
+  {
+    this.gzip = gzip;
   }
 }

@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.data.influxdb;
 
-import com.google.common.base.Preconditions;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.influxdb.InfluxDB;
 import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Pong;
@@ -26,6 +22,10 @@ import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
 import org.springframework.data.influxdb.converter.PointCollectionConverter;
 import org.springframework.util.Assert;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOperations<T>
 {
@@ -65,7 +65,6 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   @Override
   public void write(final T payload)
   {
-    Preconditions.checkArgument(payload != null, "Parameter 'payload' must not be null");
     final String database = getDatabase();
     final String retentionPolicy = getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
@@ -79,7 +78,6 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   @Override
   public void write(final List<T> payload)
   {
-    Preconditions.checkArgument(payload != null, "Parameter 'payload' must not be null");
     final String database = getDatabase();
     final String retentionPolicy = getConnectionFactory().getProperties().getRetentionPolicy();
     final BatchPoints ops = BatchPoints.database(database)
@@ -100,6 +98,12 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   public QueryResult query(final Query query, final TimeUnit timeUnit)
   {
     return getConnection().query(query, timeUnit);
+  }
+
+  @Override
+  public void query(Query query, int chunkSize, Consumer<QueryResult> consumer)
+  {
+    getConnection().query(query, chunkSize, consumer);
   }
 
   @Override
