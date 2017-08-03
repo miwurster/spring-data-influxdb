@@ -64,6 +64,7 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public void write(final T... payload)
   {
     write(Arrays.asList(payload));

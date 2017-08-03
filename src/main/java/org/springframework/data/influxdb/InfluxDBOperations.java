@@ -35,6 +35,7 @@ public interface InfluxDBOperations<T>
    *
    * @param payload the measurement to write to
    */
+  @SuppressWarnings("unchecked")
   void write(final T... payload);
 
   /**
