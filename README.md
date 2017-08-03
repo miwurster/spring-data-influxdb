@@ -1,4 +1,8 @@
 
+[![Build Status](https://travis-ci.org/miwurster/spring-data-influxdb.svg?branch=master)](https://travis-ci.org/miwurster/spring-data-influxdb)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3655132cf1784740ac283db42470d8f9)](https://www.codacy.com/app/miwurster/spring-data-influxdb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=miwurster/spring-data-influxdb&amp;utm_campaign=Badge_Grade)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.miwurster/spring-data-influxdb/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.miwurster/spring-data-influxdb)
+
 Spring Data InfluxDB
 --------------------
 
