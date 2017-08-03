@@ -5,3 +5,7 @@ spring:
     password: ~
     database: test
     retention-policy: autogen
+    connect-timeout: 5
+    read-timeout: 5
+    write-timeout: 5
+    gzip: true

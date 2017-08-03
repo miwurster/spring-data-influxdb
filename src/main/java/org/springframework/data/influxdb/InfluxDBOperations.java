@@ -35,14 +35,14 @@ public interface InfluxDBOperations<T>
    *
    * @param payload the measurement to write to
    */
-  void write(T payload);
+  void write(final T... payload);
 
   /**
    * Write a set of measurements to the database.
    *
    * @param payload the values to write to
    */
-  void write(List<T> payload);
+  void write(final List<T> payload);
 
   /**
    * Executes a query against the database.

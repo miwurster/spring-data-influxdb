@@ -18,12 +18,12 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 <dependency>
   <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
-  <version>1.5</version>
+  <version>1.6</version>
 </dependency>
 <dependency>
   <groupId>org.influxdb</groupId>
   <artifactId>influxdb-java</artifactId>
-  <version>2.5</version>
+  <version>2.7</version>
 </dependency>
 ```
 
@@ -41,7 +41,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         retention-policy: autogen
     ```
     
-    optionally, you can also set timeouts in seconds:
+    Optionally, you can also configure connections, read, and write timeouts (in seconds):
     
     ```yml
     spring:
@@ -49,6 +49,14 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         connect-timeout: 10
         read-timeout: 30
         write-timeout: 10
+    ```
+
+    Furthermore, one can enable gzip compression in order to reduce size of the transferred data:
+    
+    ```yml
+    spring:
+      influxdb:    	
+        gzip: true
     ```
 
 * Create `InfluxDBConnectionFactory` and `InfluxDBTemplate` beans:

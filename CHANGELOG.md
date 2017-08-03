@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Added gzip support
+- Added chunking support for queries
+- Added possibility to configure  connect, read, and write timeouts
 ### Changed
 - Update to Spring Boot `1.5.3.RELEASE`
+- Updated to latest `influxdb-java` version
 
 ## [1.5] - 2017-01-18
 ### Added

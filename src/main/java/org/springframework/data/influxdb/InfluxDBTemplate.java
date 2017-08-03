@@ -23,6 +23,7 @@ import org.influxdb.dto.QueryResult;
 import org.springframework.data.influxdb.converter.PointCollectionConverter;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -63,16 +64,9 @@ public class InfluxDBTemplate<T> extends InfluxDBAccessor implements InfluxDBOpe
   }
 
   @Override
-  public void write(final T payload)
+  public void write(final T... payload)
   {
-    final String database = getDatabase();
-    final String retentionPolicy = getRetentionPolicy();
-    final BatchPoints ops = BatchPoints.database(database)
-      .retentionPolicy(retentionPolicy)
-      .consistency(InfluxDB.ConsistencyLevel.ALL)
-      .build();
-    converter.convert(payload).forEach(ops::point);
-    getConnection().write(ops);
+    write(Arrays.asList(payload));
   }
 
   @Override
