@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [1.6] - 2017-08-03
 ### Added
 - Added gzip support
 - Added chunking support for queries
@@ -43,7 +45,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Basic Spring Data integration with the official `influxdb-java` library
 - Generic template (`InfluxDBTemplate`) to interact with InfluxDB
 
-[Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.5...HEAD
+[Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...HEAD
+[1.6]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.5...spring-data-influxdb-1.6
 [1.5]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.4...spring-data-influxdb-1.5
 [1.4]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.3...spring-data-influxdb-1.4
 [1.3]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.2...spring-data-influxdb-1.3
