@@ -37,6 +37,12 @@ public class InfluxDBProperties
   @NotEmpty
   private String retentionPolicy;
 
+  private int connectTimeout = 10;
+
+  private int readTimeout = 30;
+
+  private int writeTimeout = 10;
+
   public String getUrl()
   {
     return url;
@@ -87,6 +93,30 @@ public class InfluxDBProperties
     this.retentionPolicy = retentionPolicy;
   }
 
+    public int getWriteTimeout() {
+        return writeTimeout;
+    }
+
+    public void setWriteTimeout(int writeTimeout) {
+        this.writeTimeout = writeTimeout;
+    }
+
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public int getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+    }
+
   @Override
   public String toString()
   {
@@ -96,6 +126,9 @@ public class InfluxDBProperties
       .add("password", password)
       .add("database", database)
       .add("retentionPolicy", retentionPolicy)
+      .add("connectTimeout", connectTimeout)
+      .add("readTimeout", readTimeout)
+      .add("writeTimeout", writeTimeout)
       .toString();
   }
 }

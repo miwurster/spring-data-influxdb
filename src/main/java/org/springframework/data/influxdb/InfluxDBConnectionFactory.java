@@ -16,12 +16,17 @@
 
 package org.springframework.data.influxdb;
 
+import java.util.concurrent.TimeUnit;
+
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
+
+import okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient.Builder;
 
 public class InfluxDBConnectionFactory implements InitializingBean
 {
@@ -46,7 +51,10 @@ public class InfluxDBConnectionFactory implements InitializingBean
     Assert.notNull(getProperties(), "InfluxDBProperties are required");
     if (connection == null)
     {
-      connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(), properties.getPassword());
+        Builder client = new OkHttpClient.Builder().connectTimeout(properties.getConnectTimeout(), TimeUnit.SECONDS)
+                .writeTimeout(properties.getWriteTimeout(), TimeUnit.SECONDS).readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
+        connection = InfluxDBFactory.connect(properties.getUrl(), properties.getUsername(),
+                properties.getPassword(), client);
       logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
     }
     return connection;

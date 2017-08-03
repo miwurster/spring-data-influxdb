@@ -40,6 +40,16 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
         database: test
         retention-policy: autogen
     ```
+    
+    optionally, you can also set timeouts in seconds:
+    
+    ```yml
+    spring:
+      influxdb:    	
+        connect-timeout: 10
+        read-timeout: 30
+        write-timeout: 10
+    ```
 
 * Create `InfluxDBConnectionFactory` and `InfluxDBTemplate` beans:
 
