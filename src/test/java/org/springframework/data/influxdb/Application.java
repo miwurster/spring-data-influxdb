@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.concurrent.TimeUnit;
@@ -58,7 +59,7 @@ public class Application implements CommandLineRunner
 
     // ... and query the latest data
     final Query q = new Query("SELECT * FROM cpu GROUP BY tenant", influxDBTemplate.getDatabase());
-    influxDBTemplate.getConnection().query(q, 2, queryResult -> logger.info(queryResult.toString()));
+    influxDBTemplate.query(q, 10, queryResult -> logger.info(queryResult.toString()));
   }
 
   public static void main(String[] args)

@@ -1,14 +1,14 @@
 version: '2'
 services:
   influxdb:
-    image: influxdb:1.2
+    image: influxdb:1.3
     ports:
       - 8083:8083 # Web
       - 8086:8086 # TCP
     environment:
       - INFLUXDB_ADMIN_ENABLED=true
   grafana:
-    image: grafana/grafana:4.1.1
+    image: grafana/grafana:4.6.3
     ports:
       - 3000:3000 # Web
     environment:
