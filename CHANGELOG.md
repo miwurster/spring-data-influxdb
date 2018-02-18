@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.7] - 2018-02-18
+### Changed
+- Update to Spring Boot `1.5.10.RELEASE`
+- Updated to `influxdb-java` version `2.8`
+
 ## [1.6] - 2017-08-03
 ### Added
 - Added gzip support
@@ -46,6 +51,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Generic template (`InfluxDBTemplate`) to interact with InfluxDB
 
 [Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...HEAD
+[1.7]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...spring-data-influxdb-1.7
 [1.6]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.5...spring-data-influxdb-1.6
 [1.5]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.4...spring-data-influxdb-1.5
 [1.4]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.3...spring-data-influxdb-1.4
