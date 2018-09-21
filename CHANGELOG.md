@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.8] - 2018-09-21
+### Changed
+- Generate meta-data using the annotation processor
+
 ## [1.7] - 2018-02-18
 ### Changed
 - Update to Spring Boot `1.5.10.RELEASE`
@@ -50,7 +54,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Basic Spring Data integration with the official `influxdb-java` library
 - Generic template (`InfluxDBTemplate`) to interact with InfluxDB
 
-[Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...HEAD
+[Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.8...HEAD
+[1.8]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.7...spring-data-influxdb-1.8
 [1.7]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...spring-data-influxdb-1.7
 [1.6]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.5...spring-data-influxdb-1.6
 [1.5]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.4...spring-data-influxdb-1.5
