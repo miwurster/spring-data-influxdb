@@ -1,0 +1,61 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb",
+      "type": "org.springframework.data.influxdb.InfluxDBProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "defaultValue": 10,
+      "name": "spring.influxdb.connect-timeout",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb.database",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "defaultValue": false,
+      "name": "spring.influxdb.gzip",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb.password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "defaultValue": 30,
+      "name": "spring.influxdb.read-timeout",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb.retention-policy",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb.url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "name": "spring.influxdb.username",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.springframework.data.influxdb.InfluxDBProperties",
+      "defaultValue": 10,
+      "name": "spring.influxdb.write-timeout",
+      "type": "java.lang.Integer"
+    }
+  ]
+}
