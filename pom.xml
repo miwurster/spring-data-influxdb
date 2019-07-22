@@ -43,6 +43,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Dependency Versions -->
     <influxdb-java.version>2.15</influxdb-java.version>
+    <hibernate-validator.version>6.0.17.Final</hibernate-validator.version>
   </properties>
 
   <dependencies>
@@ -62,7 +63,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>6.0.17.Final</version>
+      <version>${hibernate-validator.version}</version>
     </dependency>
     <dependency>
       <groupId>org.influxdb</groupId>

@@ -17,7 +17,7 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
 ```xml
 <dependency>
-  <groupId>com.github.mbigger</groupId>
+  <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
   <version>2.0</version>
 </dependency>

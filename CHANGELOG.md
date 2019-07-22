@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [2.0] - 2018-09-21
 ### Changed
 - Update to Spring Boot `2.1.6.RELEASE`
+- Update to influxdb-java `2.15`
 
 ## [1.8] - 2018-09-21
 ### Changed
