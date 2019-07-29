@@ -8,9 +8,9 @@
     <version>2.1.6.RELEASE</version>
   </parent>
 
-  <groupId>io.github.mbigger</groupId>
+  <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
-  <version>2.0.RELEASE</version>
+  <version>2.0</version>
 
   <name>Spring Data InfluxDB</name>
   <description>Spring integration with InfluxDB.</description>
@@ -24,6 +24,10 @@
   </licenses>
 
   <developers>
+    <developer>
+      <name>Michael Wurster</name>
+      <email>miwurster@googlemail.com</email>
+    </developer>
     <developer>
       <name>Ben Wen</name>
       <email>mbigger@qq.com</email>
