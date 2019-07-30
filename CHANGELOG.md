@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Changed
+- Update to Spring Boot `2.1.6.RELEASE`
+- Update to `influxdb-java` `2.15`
+- Include `hibernate-validator` as explicit dependency
 
 ## [1.8] - 2018-09-21
 ### Changed
