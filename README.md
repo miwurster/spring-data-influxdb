@@ -17,9 +17,9 @@ This modules provides integration with the [InfluxDB](https://influxdata.com/) d
 
 ```xml
 <dependency>
-  <groupId>miwurster</groupId>
+  <groupId>com.github.miwurster</groupId>
   <artifactId>spring-data-influxdb</artifactId>
-  <version>2.0</version>
+  <version>1.8</version>
 </dependency>
 ```
 

@@ -4,11 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
-
-## [2.0] - 2018-09-21
 ### Changed
 - Update to Spring Boot `2.1.6.RELEASE`
-- Update to influxdb-java `2.15`
+- Update to `influxdb-java` `2.15`
+- Include `hibernate-validator` as explicit dependency
 
 ## [1.8] - 2018-09-21
 ### Changed
@@ -60,7 +59,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Generic template (`InfluxDBTemplate`) to interact with InfluxDB
 
 [Unreleased]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.8...HEAD
-[2.0]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.8...spring-data-influxdb-2.0
 [1.8]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.7...spring-data-influxdb-1.8
 [1.7]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.6...spring-data-influxdb-1.7
 [1.6]: https://github.com/miwurster/spring-data-influxdb/compare/spring-data-influxdb-1.5...spring-data-influxdb-1.6
